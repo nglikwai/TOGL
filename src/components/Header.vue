@@ -1,44 +1,32 @@
-<template>
-  <header>
-    <h1>{{ title }}</h1>
-    <Button
-      v-show="homePage"
-      @btn-click="$emit('toggle-add-task')"
-      :text="showAddTask ? 'Close' : 'Add Task'"
-      :color="showAddTask ? 'red' : 'green'"
-    />
-  </header>
-</template>
-
 <script>
-import Button from './Button'
-
+import { headerLinks } from "../data";
+console.log(headerLinks);
 export default {
-  name: 'Header',
-  props: {
-    title: String,
-    showAddTask: Boolean,
+  data() {
+    return {
+      headerLinks,
+    };
   },
-  components: {
-    Button,
-  },
-  computed: {
-    homePage() {
-      if (this.$route.path === '/') {
-        return true
-      } else {
-        return false
-      }
-    },
-  },
-}
+};
 </script>
 
+<template>
+  <div class="container">
+    <div class="link" v-for="headerLink in headerLinks" :key="headerLink.title">
+      {{ headerLink.title }}
+    </div>
+  </div>
+</template>
+
 <style scoped>
-header {
+.container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  color: #2079a9;
+  padding: 10px;
+  align-self: flex-end;
+}
+
+.link {
+  padding: 0 5px;
 }
 </style>
